@@ -16,4 +16,5 @@ public class Administrtivo extends Persona{
     @Column(name="cod_admin",length = 12)
     private String CodAdmin;
 
+
 }
