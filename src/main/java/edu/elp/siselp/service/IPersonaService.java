@@ -9,5 +9,7 @@ public interface IPersonaService {
     List<Persona> listaPersonas();
 
     //Buscar persona por su dni
-    Persona obtenetPersonaByDni(String dni);
+    Persona obtenerPersonaByDni(String dni);
+
+    //1: l
 }

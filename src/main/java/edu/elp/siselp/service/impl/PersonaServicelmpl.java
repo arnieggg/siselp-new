@@ -25,7 +25,8 @@ public class PersonaServicelmpl implements IPersonaService {
     }
 
     @Override
-    public Persona obtenetPersonaByDni(String dni) {
-        return null;
+    public Persona obtenerPersonaByDni(String dni) {
+        return this.personaDao.buscarPersona(dni);
     }
+
 }
