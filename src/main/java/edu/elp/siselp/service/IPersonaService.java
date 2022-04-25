@@ -11,5 +11,6 @@ public interface IPersonaService {
     //Buscar persona por su dni
     Persona obtenerPersonaByDni(String dni);
 
-    //1: l
+    //Lista docentes
+
 }
