@@ -22,10 +22,8 @@ import java.util.List;
 public class Saludo {
     @Autowired
     private IPersonaService personaService;
+    @Autowired
     private IDocenteService docenteService;
-
-
-
     @Autowired
     private IAdministrativoService administrativoService;
 
@@ -33,17 +31,8 @@ public class Saludo {
     public List<Administrativo>listaAdministrativo(){
         return this.administrativoService.listaAdministrativo();
     }
-    @Autowired
-    private IEstudianteService estudianteService;
 
-    @GetMapping("/listaEstudiantes")
-    public List<Estudiante>listaEstudiantes(){
-        return this.estudianteService.listaEstudiantes();
-    }
-    @GetMapping("/buscarEstudiante")
-    public Estudiante buscarEstudiante(@RequestParam("codigo") String codigo) {
-        return this.estudianteService.obtenerEstudianteByCodigo(codigo);
-    }
+
 
 
     @GetMapping("/listaDocentes")

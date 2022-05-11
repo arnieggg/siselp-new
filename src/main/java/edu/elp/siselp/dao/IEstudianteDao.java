@@ -1,22 +1,28 @@
 package edu.elp.siselp.dao;
 
+import edu.elp.siselp.entity.Escuela;
 import edu.elp.siselp.entity.Estudiante;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-    public interface IEstudianteDao extends JpaRepository<Estudiante,String> {
+import java.util.List;
 
-        @Query("SELECT p FROM Estudiante p WHERE p.codigo = ?1")
-        Estudiante buscarEstudiante(String codigo);
+public interface IEstudianteDao extends JpaRepository<Estudiante,Long> {
 
-        Estudiante findByDni(String codigo);
+       //Lista de estudiantes por escuela
+        List<Estudiante> findByescuela(Escuela idescuela);
 
-        @Query("SELECT p FROM Estudiante p WHERE p.nombre = ?1 AND p.apellido = ?2")
-        Estudiante findByNombreAndApellido(String nombre, String apellido);
+        //Lista de estudiantes por escuela y pagina
+    @Query("SELECT e FROM Estudiante e WHERE e.escuela = :idescuela" )
+    Page<Estudiante> listEstudiantesByPagina(Pageable pageable, @Param("idescuela") Escuela idescuela);
 
-        @Query("SELECT p FROM Estudiante p WHERE p.nombre = :nombre AND p.apellido = :apellido")
-        Estudiante findByNombreAndApellidoByParam(@Param("nombre") String nombre, @Param("apellido") String apellido);
+    // Obtener un estudiante por dni o codigo
+    @Query("SELECT e FROM Estudiante e WHERE e.codigo = :coddni OR e.dni = :coddni")
+    Estudiante obtenerPorCodigoOrDni(@Param("coddni")String coddni);
+
     }
 

@@ -1,9 +1,6 @@
 package edu.elp.siselp.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -20,27 +17,41 @@ public class Estudiante extends Persona{
     @Column(name ="estado_egreso",length = 5)
     private  String estado; //Si es egresado:SI,NO
 
-    public Estudiante() {
-    }
+    @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    private  Escuela escuela;
 
-    public Estudiante(String codigo, String serie, String estado) {
-        this.codigo = codigo;
-        this.serie = serie;
-        this.estado = estado;
-    }
-
-    public Estudiante(Long idpersona, String codigo, String serie, String estado) {
-        super(idpersona);
-        this.codigo = codigo;
-        this.serie = serie;
-        this.estado = estado;
-    }
-
-    public Estudiante(String nombre, String apellido, String edad, String sexo, Integer dni, String direccion, String telefono, Date fechaNacimiento, String codigo, String serie, String estado) {
+    public Estudiante(String nombre, String apellido, String edad, String sexo, String dni, String direccion, String telefono, Date fechaNacimiento, String codigo, String serie, String estado, Escuela escuela) {
         super(nombre, apellido, edad, sexo, dni, direccion, telefono, fechaNacimiento);
         this.codigo = codigo;
         this.serie = serie;
         this.estado = estado;
+        this.escuela = escuela;
+    }
+
+    public Estudiante(Long idpersona, String codigo, String serie, String estado, Escuela escuela) {
+        super(idpersona);
+        this.codigo = codigo;
+        this.serie = serie;
+        this.estado = estado;
+        this.escuela = escuela;
+    }
+
+    public Estudiante(String codigo, String serie, String estado, Escuela escuela) {
+        this.codigo = codigo;
+        this.serie = serie;
+        this.estado = estado;
+        this.escuela = escuela;
+    }
+
+    public Estudiante(String nombre, String apellido, String edad, String sexo, String dni, String direccion, String telefono, Date fechaNacimiento) {
+        super(nombre, apellido, edad, sexo, dni, direccion, telefono, fechaNacimiento);
+    }
+
+    public Estudiante(Long idpersona) {
+        super(idpersona);
+    }
+
+    public Estudiante() {
     }
 
     public String getCodigo() {
@@ -66,4 +77,13 @@ public class Estudiante extends Persona{
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public Escuela getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(Escuela escuela) {
+        this.escuela = escuela;
+    }
 }
+
